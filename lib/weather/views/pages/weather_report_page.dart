@@ -81,7 +81,7 @@ class _WeatherReportPageState extends State<WeatherReportPage> {
                   builder: (context, active, _) {
                     return LayoutBuilder(
                       builder: (context, constraints) {
-                        if (constraints.maxWidth <= 480) {
+                        if (constraints.maxWidth <= 426) {
                           return _VerticalView(
                             reportNotifier: _reportNotifier,
                             state: state,
@@ -114,30 +114,35 @@ class _WeatherReportPageState extends State<WeatherReportPage> {
           BlocBuilder<WeatherReportCubit, WeatherReportState>(
             builder: (context, state) {
               return state is WeatherReportLoaded
-                  ? FloatingActionButton.small(
-                      backgroundColor: Colors.blueGrey,
-                      onPressed: () {},
-                      child: PopupMenuButton<TemperatureUnit>(
-                        icon: const Icon(Icons.ac_unit),
-                        itemBuilder: (context) => TemperatureUnit.values
-                            .map(
-                              (e) => PopupMenuItem<TemperatureUnit>(
-                                key: ValueKey<TemperatureUnit>(e),
-                                onTap: () {
-                                  context
-                                      .read<WeatherReportCubit>()
-                                      .convertTempUnit(e);
-                                },
-                                child: Text(e.symbol),
-                              ),
-                            )
-                            .toList(),
+                  ? Padding(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: FloatingActionButton.small(
+                        tooltip: 'Switch temperature unit',
+                        backgroundColor: Colors.blueGrey,
+                        onPressed: () {},
+                        child: PopupMenuButton<TemperatureUnit>(
+                          icon: const Icon(Icons.ac_unit),
+                          itemBuilder: (context) => TemperatureUnit.values
+                              .map(
+                                (e) => PopupMenuItem<TemperatureUnit>(
+                                  key: ValueKey<TemperatureUnit>(e),
+                                  onTap: () {
+                                    context
+                                        .read<WeatherReportCubit>()
+                                        .convertTempUnit(e);
+                                  },
+                                  child: Text(e.symbol),
+                                ),
+                              )
+                              .toList(),
+                        ),
                       ),
                     )
                   : const SizedBox.shrink();
             },
           ),
           FloatingActionButton(
+            tooltip: 'Open city search form',
             onPressed: _showSearchPage,
             child: const Icon(Icons.search),
           )
