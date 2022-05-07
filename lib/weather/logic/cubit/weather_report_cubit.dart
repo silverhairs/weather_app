@@ -1,6 +1,7 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 import 'package:weather_app/weather/data/models/city.dart';
 import 'package:weather_app/weather/data/models/weather.dart';
 import 'package:weather_app/weather/logic/weather_report_repository.dart';
@@ -27,7 +28,7 @@ class WeatherReportCubit extends Cubit<WeatherReportState> {
       final result = await _repository.findCity(name);
       emit(SearchResultLoaded(cities: result));
     } catch (e) {
-      debugPrint('$e');
+      log('$e');
       emit(SearchFailure(message: '$e'));
     }
   }
@@ -44,7 +45,7 @@ class WeatherReportCubit extends Cubit<WeatherReportState> {
       final report = await _repository.getWeatherReports(city);
       emit(WeatherReportLoaded(report: report));
     } catch (e) {
-      debugPrint('$e');
+      log('$e');
       emit(WeatherReportFailure(message: '$e'));
     }
   }

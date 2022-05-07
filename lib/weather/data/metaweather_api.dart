@@ -5,9 +5,9 @@ import 'package:weather_app/weather/data/models/city.dart';
 import 'package:weather_app/weather/data/models/weather.dart';
 
 /// A class that handles API calls to the [MetaWeather API](https://www.metaweather.com/).
-class WeatherAPI {
-  /// Initializes a new instance of [WeatherAPI].
-  WeatherAPI({http.Client? client}) : _client = client ?? http.Client();
+class MetaWeatherAPI {
+  /// Initializes a new instance of [MetaWeatherAPI].
+  MetaWeatherAPI({http.Client? client}) : _client = client ?? http.Client();
 
   final http.Client _client;
 
@@ -72,7 +72,7 @@ class WeatherAPI {
   }
 }
 
-/// Base exception that can be thrown by [WeatherAPI].
+/// Base exception that can be thrown by [MetaWeatherAPI].
 abstract class WeatherException implements Exception {
   /// Initializes a new [WeatherException].
   const WeatherException({this.message});

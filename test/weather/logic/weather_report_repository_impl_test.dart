@@ -1,11 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:weather_app/weather/data/metaweather_api.dart';
 import 'package:weather_app/weather/data/models/city.dart';
 import 'package:weather_app/weather/data/models/weather.dart';
-import 'package:weather_app/weather/data/weather_api.dart';
 import 'package:weather_app/weather/logic/weather_report_repository_impl.dart';
 
-class MockWeatherAPI extends Mock implements WeatherAPI {}
+class MockWeatherAPI extends Mock implements MetaWeatherAPI {}
 
 class FakeCity extends Fake implements City {}
 
@@ -13,7 +13,7 @@ class FakeWeather extends Fake implements Weather {}
 
 void main() {
   late final WeatherReportRepositoryImpl subject;
-  late final WeatherAPI api;
+  late final MetaWeatherAPI api;
   final cities = List<City>.filled(4, FakeCity());
   final weathers = List<Weather>.filled(6, FakeWeather());
 

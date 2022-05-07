@@ -1,12 +1,6 @@
-# Another Weather App
+# Weather App
 
-This is just another weather app, but this time with data from [Metaweather](https://www.metaweather.com) and a different design.
-
----
-<h2 align=center>Another Weather App ?</h2>
-
----
-This app is actually [my](https:github.com/silverhairs) submission of the flutter challenge for the position of Senior Mobile Engineer at [Flaconi](https://flaconi.de)
+This app is my submission of the flutter challenge for the position of Senior Mobile Engineer at [Flaconi](https://flaconi.de)
 
 
 ## Getting Started
@@ -26,26 +20,26 @@ $ flutter test
 ```
 
 ## Architecture
-This project follows the BLoC architecture and every feature has its own module. Features are available in the lib/ directory at the same level as `main.dart` and `app.dart`. Since the project only has one feature: `Weather Reporting`; there is only one feature directory: `lib/weather`.
 
-* **main.dart**  
-This file is the entrypoint of the app, there is nothing fancy in it, just providing repositories to the app and running the `App()` widget.
+This project follows a layered architecture flavoured with the BLoC pattern. Every feature is encapsulated in a layered module. In the root of every feature, we find a barel file which exports all the necessary files of the module.
 
-* **app.dart**  
-This file holds the `App` widget which is the head of our widget tree. The `App` widget gets repositories from above it and creates `cubits` and `blocs`. The repository in out case is an implementation of `IWeatherReportRepository`, the repository is passed to a `WeatherReportCubit` which at its turn is provided to the widget tree via a `BlocProvider`.
+### Feature:
 
-* **Weather Feature**  
-Everything related to this feature is in the `weather` directory. In the said directory we have three sub directories: `data`, `logic` and `views`.
-    - `data` handles everything related to data for our weather feature: data sources, models etc.
-    - `logic` handles the business logic of our feature. We find in it a repository, a cubit and the states.
-    - `views` holds everything related to the UI/Presentation of our app: pages and widgets(components).
+![Layered Architecture with BLoC Pattern](/docs/bloc.png)
 
+This app currently has only one feature: **Weather**. In the weather feature, we find three layers: the **Presentation Layer** (Views folder), the **Business Logic Layer** (Logic folder) and the **Data Layer** (Data folder).
 
-* **core**  In the `lib` directory we also find the `core` sub directory which holds code that is not scoped to a specific `feature`. Mainly utility classes, helpers, extensions, global components etc. We don't really have any global component in the app since we only have one feature but we have some utility classes and extensions over there.
+* _Views_ are all components that compose the user interface of our application. At the highest level of the views, we have the pages. Our application only has one page: `WeatherReportPage` and the page has multiple components or widgets; for example we have the `WeatherReportCard` which is the widget that shows the weather of selected day; the widget takes the main portion of the page, and we have multiple other components well.
 
-### State Management
-State Management is handled mainly with a cubit and in some parts, a `ValueNotifier`.
+* _Logic_ are the components that handles the business logic of our feature. In the _logic_ folder, we have two main types of components: a repository and a cubit. The repository is the link between the data layer and the state of our application. Its main function is to prepare the data for the presentation layer. The cubit on the other side handles managing the states and passing data to the views. In our feature, we have only one cubit `WeatherReportCubit` and one type of repository: `IWeatherReportRepository`. Note that there could be multiple implementations of this repository, the cubit does not care, as long as they all implement the required operations. In our case since we only have one data source which is the API, we will only have one implementation of the `IWeatherReportRepository`. But later, if we want to get the weather data from another source, we may create a new implementation of the `IWeatherReportRepository` that will use that new data source instead; we will not need to do much change.
 
-### The API.
-The `WeatherAPI` class which can be found in the data layer of our `weather` feature  handles communication with the MetaWeather API and makes all the necessary requests. 
+* _Data_ layer holds the data sources and the data entities or models. Our application does not make use of local storage and we only have one remote data source (metaweather API); so this layer only has one data source: the Metaweather API. The `MetaWeatherAPI` class takes care of the communication with the API and parses the data into the models that our application is aware of such as `Weather` and `City`; those are our entities.
 
+### Global
+In the `lib/` directory, besides the weather feature, we also have a couple of stuff: the `core/` folder, two files: _main.dart_ and _app.dart_.
+
+The core folder holds objects that are not scoped by a specific feature. We find mainly utility classes, helper functions, extensions and constants. We don't have any constant or helper function in our app so the folder only holds the `Debouncer` class and a couple of extensions. The `Debouncer` class provides a `run` method to debounce operations.
+
+_main.dart_ is the entry point of our application, nothing fancy in there, just providing repositories down when running the `App` widget.
+
+_app.dart_ is home of the `App()` widget which is the head of our widget tree. This widget also injects cubits down the tree thanks to `BlocProvider`.

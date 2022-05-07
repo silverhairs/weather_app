@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:weather_app/weather/data/metaweather_api.dart';
 import 'package:weather_app/weather/data/models/weather.dart';
-import 'package:weather_app/weather/data/weather_api.dart';
 
 /// An extension on [DateTime].
 extension DateExtension on DateTime {
@@ -54,6 +54,6 @@ extension WeatherX on Weather {
   }
 
   String _getImageURL(String path) {
-    return 'https://${WeatherAPI.authority}/static/img/weather/png$path';
+    return 'https://${MetaWeatherAPI.authority}/static/img/weather/png$path';
   }
 }

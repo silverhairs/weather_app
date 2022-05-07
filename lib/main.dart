@@ -5,7 +5,7 @@ import 'package:weather_app/weather/weather.dart';
 
 void main() {
   final weatherReportRepository = WeatherReportRepositoryImpl(
-    api: WeatherAPI(),
+    api: MetaWeatherAPI(),
   );
   runApp(
     RepositoryProvider<IWeatherReportRepository>.value(

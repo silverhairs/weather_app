@@ -1,6 +1,6 @@
+export 'data/metaweather_api.dart';
 export 'data/models/city.dart';
 export 'data/models/weather.dart';
-export 'data/weather_api.dart';
 export 'logic/cubit/weather_report_cubit.dart';
 export 'logic/weather_report_repository.dart';
 export 'logic/weather_report_repository_impl.dart';

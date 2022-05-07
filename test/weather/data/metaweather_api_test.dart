@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:weather_app/weather/data/metaweather_api.dart';
 import 'package:weather_app/weather/data/models/city.dart';
 import 'package:weather_app/weather/data/models/weather.dart';
-import 'package:weather_app/weather/data/weather_api.dart';
 
 class MockHttpClient extends Mock implements Client {}
 
@@ -14,7 +14,7 @@ class FakeURI extends Fake implements Uri {}
 class FakeWeather extends Fake implements Weather {}
 
 void main() {
-  late final WeatherAPI subject;
+  late final MetaWeatherAPI subject;
   late final Client httpClient;
   const cityData = {'title': 'Paris', 'latt_long': '12, 5', 'woeid': 1};
   final city = City.fromMap(cityData);
@@ -33,12 +33,12 @@ void main() {
     ]
   };
 
-  group('WeatherAPI', () {
+  group('MetaWeatherAPI', () {
     setUpAll(() {
       registerFallbackValue(FakeURI());
       registerFallbackValue(city);
       httpClient = MockHttpClient();
-      subject = WeatherAPI(client: httpClient);
+      subject = MetaWeatherAPI(client: httpClient);
     });
 
     group('searchCity', () {

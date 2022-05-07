@@ -1,9 +1,9 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:weather_app/weather/data/metaweather_api.dart';
 import 'package:weather_app/weather/data/models/city.dart';
 import 'package:weather_app/weather/data/models/weather.dart';
-import 'package:weather_app/weather/data/weather_api.dart';
 import 'package:weather_app/weather/logic/cubit/weather_report_cubit.dart';
 import 'package:weather_app/weather/logic/weather_report_repository.dart';
 
