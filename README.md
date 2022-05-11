@@ -1,6 +1,6 @@
 # Weather App
 
-This is [my](mailto://boriskayienzo@gmail.com) submission to the flutter challenge for the position of Senior Mobile Engineer at [Flaconi](https://flaconi.de)
+An app to get weather reports using the [Metaweather API](https://www.metaweather.com/api/).
 
 ## Getting Started
 
