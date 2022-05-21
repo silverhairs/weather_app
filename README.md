@@ -1,5 +1,7 @@
 # Weather App
 
+![main](https://github.com/silverhairs/weather_app/actions/workflows/main.yaml/badge.svg)
+
 An app to get weather reports using the [Metaweather API](https://www.metaweather.com/api/).
 
 ## Getting Started
