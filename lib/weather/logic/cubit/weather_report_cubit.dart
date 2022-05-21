@@ -27,8 +27,8 @@ class WeatherReportCubit extends Cubit<WeatherReportState> {
     try {
       final result = await _repository.findCity(name);
       emit(SearchResultLoaded(cities: result));
-    } catch (e) {
-      log('$e');
+    } catch (e, s) {
+      addError(e, s);
       emit(SearchFailure(message: '$e'));
     }
   }

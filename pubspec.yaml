@@ -6,10 +6,10 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.16.2 <3.0.0'
+  sdk: '>=2.17.1 <3.0.0'
 
 dependencies:
-  cached_network_image: ^3.2.0
+  cached_network_image: ^3.2.1
   cupertino_icons: ^1.0.2
   equatable: ^2.0.3
   flutter:
@@ -17,7 +17,9 @@ dependencies:
   flutter_bloc: ^8.0.1
   http: ^0.13.4
   intl: ^0.17.0
-  pull_to_refresh: ^2.0.0
+  # Official package has minor issues caused by Flutter 3.0
+  pull_to_refresh:
+    git: https://github.com/silverhairs/flutter_pulltorefresh.git
 
 dev_dependencies:
   bloc_test: ^9.0.3
